@@ -56,6 +56,9 @@ class NeedDirective(SphinxDirective):
 
     @measure_time("need")
     def run(self) -> Sequence[nodes.Node]:
+        file = self.get_source_info()[0]
+        if not file:
+            return []
         needs_config = NeedsSphinxConfig(self.env.config)
 
         delete_opt = self.options.get("delete")
